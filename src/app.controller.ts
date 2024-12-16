@@ -22,14 +22,14 @@ export class ApiController {
     return this.serviceClient.send('get_user', id).toPromise();
   }
 
-  @Post('orders')
-  async createOrder(@Body() orderData: any) {
-    // Proxy vers un microservice qui gère les commandes
-    return this.serviceClient.send('create_order', orderData).toPromise();
+  @Post('register')
+  async register(@Body() body: { email: string; password: string }) {
+    // Envoi du message au microservice avec le sujet 'auth_register'
+    return this.serviceClient.send('auth_register', body).toPromise();
   }
 
   @Post('login')
-  async register(@Body() body: { email: string; password: string }) {
+  async login(@Body() body: { email: string; password: string }) {
     // Envoi du message au microservice avec le sujet 'auth_register'
     return this.serviceClient.send('auth_login', body).toPromise();
   }
